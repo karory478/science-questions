@@ -1,0 +1,376 @@
+<body>
+<style>
+body, html { margin: 0px; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: gray;
+}
+
+.question {
+  width: 70%;
+  border: 1px black solid;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.question h1.question-label {
+  text-align: center;
+  color: white;
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.question .choices-ctn {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.question .choices-ctn .choice:hover {color: black;font-weight: bolder;cursor: pointer;}
+.question .choices-ctn .choice {
+  transition: 0.5s;
+  text-align: center;
+  color: #F9F6EE;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: lighter;
+  margin-top: 10px;
+}
+
+.correct { background-color: green; border-radius: 10px; padding: 5px; }
+.false { background-color: red; border-radius: 10px; padding: 5px; }
+</style>
+<script>
+const data = [
+        {
+            "question": "What is the study of microorganisms known as?",
+            "choices": {
+                "A": "Meteorology",
+                "B": "Microbiology",
+                "C": "Botany",
+                "D": "Geology"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "Which of the following is an example of a useful microorganism?",
+            "choices": {
+                "A": "Earthworm",
+                "B": "E. coli bacteria",
+                "C": "Malaria parasite",
+                "D": "Cockroach"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "How can diseases caused by microorganisms be prevented and treated?",
+            "choices": {
+                "A": "With chemical fertilizers",
+                "B": "By eating raw meat",
+                "C": "Through vaccination and antibiotics",
+                "D": "By avoiding sunlight"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What is the term for a diet that provides all essential nutrients in the right proportions?",
+            "choices": {
+                "A": "Imbalanced diet",
+                "B": "Balanced diet",
+                "C": "Unhealthy diet",
+                "D": "Vegetarian diet"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the primary role of nitrogen in plants?",
+            "choices": {
+                "A": "Energy production",
+                "B": "Structural support",
+                "C": "Nutrient absorption",
+                "D": "DNA synthesis"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What is the nitrogen cycle important for in the environment?",
+            "choices": {
+                "A": "Fuel production",
+                "B": "Waste disposal",
+                "C": "Nutrient recycling",
+                "D": "Air purification"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "Which of the following is not a method of food production technology?",
+            "choices": {
+                "A": "Irrigation",
+                "B": "Crop rotation",
+                "C": "Genetic engineering",
+                "D": "Aquaculture"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the purpose of food processing technology?",
+            "choices": {
+                "A": "To increase the shelf life of food",
+                "B": "To make food taste better",
+                "C": "To reduce the nutritional value of food",
+                "D": "To increase the cost of food"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "Which of the following is an example of a health food?",
+            "choices": {
+                "A": "Soda pop",
+                "B": "Potato chips",
+                "C": "Fresh fruits and vegetables",
+                "D": "Candy bars"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What is the primary focus of sustainability of the environment?",
+            "choices": {
+                "A": "Maximizing resource consumption",
+                "B": "Preserving and conserving natural resources",
+                "C": "Accelerating pollution",
+                "D": "Promoting deforestation"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the term for the complete set of phases a product goes through from its creation to disposal?",
+            "choices": {
+                "A": "Product life cycle",
+                "B": "Environmental preservation",
+                "C": "Biodegradation",
+                "D": "Ecological footprint"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "Which of the following is a major source of environmental pollution?",
+            "choices": {
+                "A": "Solar energy",
+                "B": "Wind turbines",
+                "C": "Automobile emissions",
+                "D": "Recycling programs"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What is the goal of preservation and conservation of the environment?",
+            "choices": {
+                "A": "Maximizing resource exploitation",
+                "B": "Protecting and maintaining ecosystems and biodiversity",
+                "C": "Accelerating deforestation",
+                "D": "Promoting pollution"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the term for the speed at which a chemical reaction occurs?",
+            "choices": {
+                "A": "Temperature",
+                "B": "Rate of reaction",
+                "C": "Pressure",
+                "D": "Volume"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "Which of the following factors can affect the rate of a chemical reaction?",
+            "choices": {
+                "A": "The color of the reactants",
+                "B": "The phase of the moon",
+                "C": "Temperature and concentration of reactants",
+                "D": "The time of day"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "In what real-world applications can the concept of rate of reaction be important?",
+            "choices": {
+                "A": "Weather forecasting",
+                "B": "Cooking food",
+                "C": "Medical diagnosis",
+                "D": "Evaluating sports performance"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the study of carbon compounds known as?",
+            "choices": {
+                "A": "Astrobiology",
+                "B": "Carbonology",
+                "C": "Chemistry",
+                "D": "Geology"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "Which of the following is a type of hydrocarbon?",
+            "choices": {
+                "A": "Water (H2O)",
+                "B": "Methane (CH4)",
+                "C": "Table salt (NaCl)",
+                "D": "Oxygen (O2)"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the primary function of fats in the human body?",
+            "choices": {
+                "A": "Energy storage and insulation",
+                "B": "Transporting oxygen in the blood",
+                "C": "Digesting food",
+                "D": "Building muscle mass"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "Which of the following is a commonly used source of palm oil?",
+            "choices": {
+                "A": "Peanuts",
+                "B": "Coconut",
+                "C": "Soybeans",
+                "D": "Oil palm trees"
+            },
+            "answer": "D"
+        },
+        {
+            "question": "What is an electrolytic cell used for?",
+            "choices": {
+                "A": "Generating electricity from sunlight",
+                "B": "Storing food",
+                "C": "Splitting water into hydrogen and oxygen",
+                "D": "Baking cookies"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What is a chemical cell primarily used for?",
+            "choices": {
+                "A": "Cooking food",
+                "B": "Producing heat",
+                "C": "Converting chemical energy into electrical energy",
+                "D": "Filtering water"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "How are images formed by lenses?",
+            "choices": {
+                "A": "By reflecting light",
+                "B": "By bending or refracting light",
+                "C": "By emitting light",
+                "D": "By absorbing light"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the purpose of optical instruments?",
+            "choices": {
+                "A": "To create illusions",
+                "B": "To produce sound",
+                "C": "To manipulate light for various purposes",
+                "D": "To capture images of distant galaxies"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What is pressure in fluids primarily influenced by?",
+            "choices": {
+                "A": "The color of the fluid",
+                "B": "The fluid's temperature",
+                "C": "The fluid's density and depth",
+                "D": "The fluid's taste"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What is a satellite in the context of space technology?",
+            "choices": {
+                "A": "A natural satellite, like the Moon",
+                "B": "A man-made object in orbit around a celestial body",
+                "C": "A type of comet",
+                "D": "A type of asteroid"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the main purpose of the Global Positioning System (GPS)?",
+            "choices": {
+                "A": "To broadcast television signals",
+                "B": "To track the movement of marine animals",
+                "C": "To determine precise locations and provide navigation information",
+                "D": "To monitor space weather"
+            },
+            "answer": "C"
+        }
+]
+
+for (question of shuffle(data)) {
+  const question_par = document.createElement("div");
+  question_par.classList.add("question");
+
+  const question_ques = document.createElement("h1");
+  question_ques.classList.add("question-label");
+  question_ques.innerHTML = question.question;
+
+  const choices_ctn = document.createElement("div");
+  choices_ctn.classList.add("choices-ctn")
+
+  document.body.appendChild(question_par);
+  document.body.appendChild(question_ques);
+  document.body.appendChild(choices_ctn);
+
+  question_par.appendChild(question_ques);
+  question_par.appendChild(choices_ctn);
+
+  for (const choice_lab in question.choices) {
+      const label = question.choices[choice_lab];
+      const choice_label_el = document.createElement("h2");
+
+      choice_label_el.classList.add("choice")
+
+      document.body.appendChild(choice_label_el);
+      choices_ctn.appendChild(choice_label_el);
+      choice_label_el.innerHTML = label;
+      choice_label_el.setAttribute("data-correct", `${question.answer === choice_lab}`);
+  }
+
+Array.from(document.querySelectorAll(".choice")).forEach(choice_el => {
+  choice_el.addEventListener("click", event => {
+     if (choice_el.getAttribute("data-correct") === "true") { choice_el.classList.add("correct") } else { choice_el.classList.add("false") }
+  })
+})
+}
+
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+</script>
+</body>
